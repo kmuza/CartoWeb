@@ -51,7 +51,7 @@ class ApiClient {
 
     async getToken() {
         const url = this.url + '/api/users/login';
-
+        // se loguea con un usuario valido para obtener el token
         const raw = JSON.stringify({
         "loginusuario": "JTRUJIG",
         "contrasenaweb": "JTRUJIG"

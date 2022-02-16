@@ -12,8 +12,13 @@ const loadCapAbilities = async () => {
 // loadCapAbilities();
 
 const paintCapAbilities = async (vector_layers) => {
+  // lista de layers administrativos
+  const administrativos = ['departamento', 'municipio', 'localidad', 'barrios'];
   
-  let layers = [];
+  let layers = []; //<-- capas de negocios para pintar
+  let layers_admin = []; //<-- capas administrativas para pintar
+  let source;
+  let layer;
   
 
 
@@ -41,13 +46,33 @@ const paintCapAbilities = async (vector_layers) => {
           break;          
     }
 
-    if(id !== 'departamento'){
-        let source = new ol.source.VectorTile({
-        url: vector_layers[i].tiles[0],
-            format: new ol.format.MVT(),
-        });
+    if (administrativos.includes(id)) {
 
-      let layer = new ol.layer.VectorTile({
+      source = new ol.source.VectorTile({
+        url: vector_layers[i].tiles[0],
+        format: new ol.format.MVT(),
+      });
+
+      layer = new ol.layer.VectorTile({
+        name: vector_layers[i].name,
+        source: source,
+        minZoom: parseInt(vector_layers[i].minzoom) + 1,
+        maxZoom: vector_layers[i].maxzoom,
+        // style: style_layer,
+        visible: false,
+      });
+
+      layers_admin.push(layer);
+
+    } else {
+
+      
+      source = new ol.source.VectorTile({
+        url: vector_layers[i].tiles[0],
+        format: new ol.format.MVT(),
+      });
+
+      layer = new ol.layer.VectorTile({
         name: vector_layers[i].name,
         source: source,
         minZoom: parseInt(vector_layers[i].minzoom) + 1,
@@ -56,6 +81,7 @@ const paintCapAbilities = async (vector_layers) => {
       });
 
       layers.push(layer);
+      
 
     }   
   }
@@ -65,7 +91,14 @@ const paintCapAbilities = async (vector_layers) => {
     title: 'Capas Base',
     layers: layers
   })
+
+  // GRUPOS DE CAPAS
+  grupo_capas_admin =  new ol.layer.Group({
+    title: 'Capas Administrativas',
+    layers: layers_admin
+  })
     
+    map.addLayer(grupo_capas_admin);
     map.addLayer(grupo_capas);
 }
 
