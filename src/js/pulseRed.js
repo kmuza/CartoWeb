@@ -1,3 +1,7 @@
+funciton createHeader() {
+    
+}
+
 function createRow(key, value) {
     return `<tr><td>${key}</td><td>${value?value : '--'}</td></tr>`;
 }
@@ -8,7 +12,7 @@ function createTableApoyo(properties) {
     keys.forEach(key => {
         innerHTML += createRow(key, properties[key]);
     });
-    return '<table id="propiedades">' + innerHTML + '</table>'
+    return '<table class="propiedades">' + innerHTML + '</table>'
 }
 
 function createTableTramobt(properties) {
@@ -17,7 +21,7 @@ function createTableTramobt(properties) {
     keys.forEach(key => {
         innerHTML += createRow(key, properties[key]);
     });
-    return '<table id="propiedades">' + innerHTML + '</table>'
+    return '<table class="propiedades">' + innerHTML + '</table>'
 }
 
 function createTableTrafo(properties) {
@@ -26,16 +30,65 @@ function createTableTrafo(properties) {
     keys.forEach(key => {
         innerHTML += createRow(key, properties[key]);
     });
-    return '<table id="propiedades">' + innerHTML + '</table>'
+    return '<table class="propiedades">' + innerHTML + '</table>'
 }
 
 function createTableClientes(properties) {
-    const keys = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
-    let innerHTML = `<tr><th>Propiedad</th><th>Valor</th></tr>`;
-    keys.forEach(key => {
-        innerHTML += createRow(key, key);
-    });
-    return '<table id="propiedades">' + innerHTML + '</table>'
+    return `        
+    <table id="table-container-breakpoint">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Height</th>
+            <th>Province</th>
+            <th>Sport</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jill Smith abelador de las priella</td>
+            <td>25</td>
+            <td>Female</td>
+            <td>5'4</td>
+            <td>British Columbia</td>
+            <td>Volleyball</td>
+          </tr>
+          <tr>
+            <td>John Stone</td>
+            <td>30</td>
+            <td>Male</td>
+            <td>5'9</td>
+            <td>Ontario</td>
+            <td>Badminton</td>
+          </tr>
+          <tr>
+            <td>Jane Strip</td>
+            <td>29</td>
+            <td>Female</td>
+            <td>5'6</td>
+            <td>Manitoba</td>
+            <td>Hockey</td>
+          </tr>
+          <tr>
+            <td>Gary Mountain</td>
+            <td>21</td>
+            <td>Mail</td>
+            <td>5'8</td>
+            <td>Alberta</td>
+            <td>Curling</td>
+          </tr>
+          <tr>
+            <td>James Camera</td>
+            <td>31</td>
+            <td>Male</td>
+            <td>6'1</td>
+            <td>British Columbia</td>
+            <td>Hiking</td>
+          </tr>
+        </tbody>
+      </table>`
 }
 
 function decodeTableClientes(properties) {
@@ -109,6 +162,10 @@ function switchEvent(properties) {
         // container_content.innerHTML = '';
         // MostrarModal(properties);
         container_content.innerHTML = createTableClientes(properties);
+        new basictable('#table-container-breakpoint', {
+            containerBreakpoint: 578,
+            tableWrap: true,
+        });
         return;
     } else if (properties.hasOwnProperty('fnap')) {
         console.log('tramobt');
