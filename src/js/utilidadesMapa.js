@@ -88,8 +88,6 @@ function UbicarEnMapa(lat, lon) {
 
 
 function UbicarEnMapaXY(x, y) {
-   proj4.defs("EPSG:3116","+proj=tmerc +lat_0=4.596200416666666 +lon_0=-74.07750791666666 +k=1 +x_0=1000000 +y_0=1000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
-   ol.proj.proj4.register(proj4);
 
    let MagnaSirgas = ol.proj.get('EPSG:3116');
    // let XY = ol.proj.get('EPSG:4326');

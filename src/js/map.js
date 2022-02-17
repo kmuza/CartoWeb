@@ -46,6 +46,12 @@ var buscar = new ol.control.Button({
   }
 });
 
+map.on("moveend", function(e){
+sessionStorage.setItem('zoom',map.getView().getZoom());
+sessionStorage.setItem('center',ol.proj.toLonLat(map.getView().getCenter()));
+});
+
+
 // layerSwitcher
 var ctrl = new ol.control.LayerSwitcher({
     // collapsed: false,
