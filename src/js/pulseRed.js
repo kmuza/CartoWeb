@@ -1,5 +1,5 @@
-funciton createHeader() {
-    
+function createHeader() {
+
 }
 
 function createRow(key, value) {
