@@ -6,7 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
-        <script src="https://kit.fontawesome.com/bd0a3f9594.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/bd0a3f9594.js"
+            crossorigin="anonymous"></script>
         <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
         <title>Cartografia v.0.1</title>
         <link rel="stylesheet" href="./css/ol3-sidebar.css">
@@ -22,8 +23,8 @@
 
         <!-- swit alert -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.min.js"></script>
-
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.min.js"></script>
         <link rel="stylesheet" href="./css/styles.css">
 
     </head>
@@ -32,13 +33,13 @@
 
         <div class="container">
             <div class="header"></div>
-                <div id="popup" class="ol-popup">
-                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                    <div id="popup-content"></div>
-                </div>
-           
+            <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>
+
             <div class="map-container">
-                 <div id="info"></div>
+                <div id="info"></div>
                 <div id="sidebar" class="sidebar collapsed">
                     <!-- Nav tabs -->
                     <div class="sidebar-tabs">
@@ -63,7 +64,7 @@
                                     <i class="fa fa-globe"></i>
                                 </a>
                             </li>
-                                        
+
                             <li>
                                 <a href="#busquedas" role="tab">
                                     <i class="fa fa-search"></i>
@@ -98,75 +99,101 @@
                         </div>
 
                         <div class="sidebar-pane" id="busquedas">
-                            <h1 class="sidebar-header">Modulo Busquedas<span class="sidebar-close"><i
+                            <h1 class="sidebar-header">Modulo Busquedas<span
+                                    class="sidebar-close"><i
                                         class="fa fa-caret-left"></i></span></h1>
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="Entidades">ENTIDADES</h5>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="CajaCodigoABuscar"
+                                        <input type="text" class="form-control"
+                                            id="CajaCodigoABuscar"
                                             placeholder="Digite el código">
                                         <div><br></div>
                                         <label>Seleccione el Tipo de Entidad</label>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="RadioEntidad" id="RadioApoyo"
+                                        <div class="form-check
+                                            form-check-inline">
+                                            <input class="form-check-input"
+                                                type="radio" name="RadioEntidad"
+                                                id="RadioApoyo"
                                                 value="1" checked>
-                                            <label class="form-check-label" for="RadioApoyo">Apoyo</label>
+                                            <label class="form-check-label"
+                                                for="RadioApoyo">Apoyo</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="RadioEntidad"
+                                        <div class="form-check
+                                            form-check-inline">
+                                            <input class="form-check-input"
+                                                type="radio" name="RadioEntidad"
                                                 id="RadioTrafodis" value="2">
-                                            <label class="form-check-label" for="RadioTrafodis">
+                                            <label class="form-check-label"
+                                                for="RadioTrafodis">
                                                 Transformador
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioEntidad"
+                                            <input class="form-check-input"
+                                                type="radio" name="RadioEntidad"
                                                 id="RadioCliente" value="3">
-                                            <label class="form-check-label" for="RadioCliente">
+                                            <label class="form-check-label"
+                                                for="RadioCliente">
                                                 Cliente
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioEntidad"
+                                            <input class="form-check-input"
+                                                type="radio" name="RadioEntidad"
                                                 id="RadioTramoBT" value="4">
-                                            <label class="form-check-label" for="RadioTramoBT">
+                                            <label class="form-check-label"
+                                                for="RadioTramoBT">
                                                 Tramo BT
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioEntidad"
+                                            <input class="form-check-input"
+                                                type="radio" name="RadioEntidad"
                                                 id="RadioTramoMT" value="5">
-                                            <label class="form-check-label" for="RadioTramoMT">
+                                            <label class="form-check-label"
+                                                for="RadioTramoMT">
                                                 Tramo MT
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioEntidad"
+                                            <input class="form-check-input"
+                                                type="radio" name="RadioEntidad"
                                                 id="RadioSubestacion" value="6">
-                                            <label class="form-check-label" for="RadioSubestacion">Subestación</label>
+                                            <label class="form-check-label"
+                                                for="RadioSubestacion">Subestación</label>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label>Seleccione el Tipo de Código</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioTipoCantidad"
-                                                id="RadioCodigoInterno" value="0" checked>
-                                            <label class="form-check-label" for="RadioCodigoInterno">Interno</label>
+                                            <input class="form-check-input"
+                                                type="radio"
+                                                name="RadioTipoCantidad"
+                                                id="RadioCodigoInterno"
+                                                value="0" checked>
+                                            <label class="form-check-label"
+                                                for="RadioCodigoInterno">Interno</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioTipoCantidad"
-                                                id="RadioCodigoExterno" value="1">
-                                            <label class="form-check-label" for="RadioCodigoExterno">Externo</label>
+                                            <input class="form-check-input"
+                                                type="radio"
+                                                name="RadioTipoCantidad"
+                                                id="RadioCodigoExterno"
+                                                value="1">
+                                            <label class="form-check-label"
+                                                for="RadioCodigoExterno">Externo</label>
                                         </div>
                                         <br>
-                                        <button type="button" class="btn btn-primary" id="btnBuscarEntidad">Buscar</button>
+                                        <button type="button" class="btn
+                                            btn-primary" id="btnBuscarEntidad">Buscar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                 
+
 
                         <div class="sidebar-pane" id="maps">
                             <h1 class="sidebar-header">
@@ -184,7 +211,9 @@
                                     <option selected>Seleccione el mapa base</option>
                                 </select>
                                 <div class="mb-3">
-                                    <button  id="modal_mapa" type="button" class="btn btn-primary">Agregar Mapa Base</button>
+                                    <button id="modal_mapa" type="button"
+                                        class="btn btn-primary">Agregar Mapa
+                                        Base</button>
                                 </div>
                             </div>
                         </div>
@@ -213,66 +242,76 @@
                                         class="fa fa-caret-left"></i></span></h1>
                             <table id="customers">
                                 <thead>
-                                <tr>
-                                    <th>Código Cliente</th>
-                                    <th>Nombre</th>
-                                    <th>Dirección</th>
-                                </tr>
-                            </thead>
-                        <tbody id="costumers_tbody">
-                                <tr>
-                                    <td></td>
-                                    <td>/td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            </table>
+                                    <tr>
+                                        <th>Código Cliente</th>
+                                        <th>Nombre</th>
+                                        <th>Dirección</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="costumers_tbody">
+                                    <tr>
+                                        <td></td>
+                                        <td>/td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="map" class="sidebar-map"></div>
+                    <div id="map" class="sidebar-map"></div>
+                </div>
+                <div class="footer">
+                    <div class="footer-block">
+                        <span>Coordenadas</span>
+                        <div id="coordinates"></div>
+                        <div id="mouse-position"></div>
+                    </div>
+                    <div class="footer-block">
+                        <span>Usuario</span>
+                        <div id="username">ADMIN</div>
+                    </div>
+                    <div class="footer-block">
+                        <span>Proyeccion</span>
+                        <div id="spatialreference">EPSG:4326</div>
+                    </div>
+                </div>
             </div>
-            <div class="footer">
-                <div class="footer-block">
-                    <span>Coordenadas</span>
-                    <div id="coordinates"></div>
-						<div id="mouse-position"></div>							   
-                </div>
-                <div class="footer-block">
-                    <span>Usuario</span>
-                    <div id="username">ADMIN</div>
-                </div>
-                <div class="footer-block">
-                    <span>Proyeccion</span>
-                    <div id="spatialreference">EPSG:4326</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- <script src="./js/bootstrap.bundle.min.js"></script> -->
 
-        <script src="./js/global.js"></script>
+            <!-- <script src="./js/bootstrap.bundle.min.js"></script> -->
+            <script src="./js/global.js"></script>
 
-        <script src="./js/ol3-sidebar.js"></script>
-        <script src="./js/capas.js"></script>
-        <script src="./js/init.js"></script>
-        <script src="./js/map.js"></script>
-        <!-- <script src="./js/MousePosition.js"></script> -->
-        <script src="./js/overlayinfo.js"></script>
-        <!-- <script src="./js/info.js"></script> -->
-        <script src="./js/pulseRed.js"></script>
-        <script src="./js/utilidadesMapa.js"></script>
-        <script>
+            <script src="./js/ol3-sidebar.js"></script>
+            <script src="./js/capas.js"></script>
+            <script src="./js/init.js"></script>
+            <script src="./js/map.js"></script>
+            <!-- <script src="./js/MousePosition.js"></script> -->
+            <script src="./js/overlayinfo.js"></script>
+            <!-- <script src="./js/info.js"></script> -->
+            <script src="./js/pulseRed.js"></script>
+            <script src="./js/utilidadesMapa.js"></script>
+            <script>
             window.onload = () => { 
                 loadCapAbilities();
                 // map.addLayer(grupo_capas);
                 const admin_capas = document.querySelector('#map > div > div.ol-overlaycontainer-stopevent > div.ol-layerswitcher.ol-unselectable.ol-control.ol-collapsed > button');
                 admin_capas.setAttribute('title','Administrador de Capas');    
             };
+
+            if (!!sessionStorage.getItem('zoom'))  
+            {
+            let view_i = map.getView();
+            view_i.animate({
+            zoom: sessionStorage.getItem('zoom'),
+            duration: 500
+             });
+             let divisiones = sessionStorage.getItem('center').split(",",2);
+             UbicarEnMapa(parseFloat(divisiones[1]),parseFloat(divisiones[0]));
+
+            };
         </script>
+        </body>
 
-    </body>
-
-</html>
+    </html>
