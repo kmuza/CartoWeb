@@ -1,6 +1,51 @@
-function createHeader() {
+function createTableHeaderString(headers) {
+    let table_header = document.createElement('thead');
+    let table_row = document.createElement('tr');
+
+    headers.forEach(function (header) {
+        
+        let th = document.createElement('th');
+        th.innerHTML = header;
+        table_row.appendChild(th);
+
+    })
+    table_header.appendChild(table_row);
+
+    return table_header.outerHTML;
+}
+
+function createTableRowBody(featuresObj) {
+    
+    const keys = Object.keys(featuresObj);
+    let table_row = document.createElement('tr');
+    keys.forEach(function (key, index) {
+        
+        let table_data = document.createElement('td');
+        table_data.innerHTML = `${featuresObj[key]}`;
+        table_row.appendChild(table_data);
+
+    })
+    return table_row;
 
 }
+
+function createTableBodyString(featuresObjList) {
+    let table_body = document.createElement('tbody');
+    featuresObjList.forEach(function (featuresObj) {
+        let table_row = createTableRowBody(featuresObj)
+        table_body.appendChild(table_row);
+    })
+
+    return table_body.outerHTML;
+}
+
+function createTableString(table_header, table_body) {
+    let table = document.createElement('table');
+    table.innerHTML = table_header + table_body;
+    return table.outerHTML;
+}
+
+
 
 function createRow(key, value) {
     return `<tr><td>${key}</td><td>${value?value : '--'}</td></tr>`;
@@ -48,7 +93,7 @@ function createTableClientes(properties) {
         </thead>
         <tbody>
           <tr>
-            <td>Jill Smith abelador de las priella</td>
+            <td>Jill Smith abelardo de las priella</td>
             <td>25</td>
             <td>Female</td>
             <td>5'4</td>
@@ -161,6 +206,7 @@ function switchEvent(properties) {
         // hidePopUp();
         // container_content.innerHTML = '';
         // MostrarModal(properties);
+        console.log(properties);
         container_content.innerHTML = createTableClientes(properties);
         new basictable('#table-container-breakpoint', {
             containerBreakpoint: 578,
