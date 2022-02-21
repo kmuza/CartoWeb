@@ -1,7 +1,33 @@
+let shouldUpdate = true;
+
+
 const attribution = new ol.control.Attribution({
     collapsible: true,
 });
 
+// default zoom, center and rotation
+let zoom = 9;
+let center = ol.proj.fromLonLat([-73.1202805, 7.107080]);
+let rotation = 0;
+
+if (window.location.hash !== '') {
+  // try to restore center, zoom-level and rotation from the URL
+  const hash = window.location.hash.replace('#map=', '');
+  const parts = hash.split('/');
+  if (parts.length === 4) {
+    zoom = parseFloat(parts[0]);
+    center = [parseFloat(parts[1]), parseFloat(parts[2])];
+    rotation = parseFloat(parts[3]);
+  }
+}
+
+let view = new ol.View({
+        center: center,
+        zoom: zoom,
+        rotation: rotation,
+        minZoom: 1,
+        maxZoom: 20,
+    })
 
 
 let map = new ol.Map({
@@ -10,12 +36,7 @@ let map = new ol.Map({
         attribution: false
     }).extend([attribution]),
     layers: [baseLayers],
-    view: new ol.View({
-        center: ol.proj.fromLonLat([-73.1202805, 7.107080]),
-        minZoom: 1,
-        maxZoom: 20,
-        zoom: 19
-    })
+    view: view
 });
 
 
@@ -46,11 +67,52 @@ var buscar = new ol.control.Button({
   }
 });
 
-map.on("moveend", function(e){
-sessionStorage.setItem('zoom',map.getView().getZoom());
-sessionStorage.setItem('center',ol.proj.toLonLat(map.getView().getCenter()));
+
+// mantener el estado de la vista zoom y center
+
+const updatePermalink = function () {
+    const view = map.getView();
+
+  if (!shouldUpdate) {
+    // do not update the URL when the view was changed in the 'popstate' handler
+    shouldUpdate = true;
+    return;
+  }
+
+  const center = view.getCenter();
+  const hash =
+    '#map=' +
+    view.getZoom().toFixed(2) +
+    '/' +
+    center[0].toFixed(2) +
+    '/' +
+    center[1].toFixed(2) +
+    '/' +
+    view.getRotation();
+  const state = {
+    zoom: view.getZoom(),
+    center: view.getCenter(),
+    rotation: view.getRotation(),
+  };
+  window.history.pushState(state, 'map', hash);
+};
+
+map.on('moveend', updatePermalink);
+
+// restore the view state when navigating through the history, see
+// https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate
+window.addEventListener('popstate', function (event) {
+  if (event.state === null) {
+    return;
+  }
+  map.getView().setCenter(event.state.center);
+  map.getView().setZoom(event.state.zoom);
+  map.getView().setRotation(event.state.rotation);
+  shouldUpdate = false;
 });
 
+
+/// -----------------------------------------------------------------------------
 
 // layerSwitcher
 var ctrl = new ol.control.LayerSwitcher({
