@@ -10,6 +10,18 @@ let zoom = 9;
 let center = ol.proj.fromLonLat([-73.1202805, 7.107080]);
 let rotation = 0;
 
+
+if (!!sessionStorage.getItem('hash')) {
+    console.log('sessionStorage.getItem("hash")');
+    let hash = sessionStorage.getItem('hash').replace('#map=', '');
+    const parts = hash.split('/');
+    if (parts.length === 4) {
+      zoom = parseFloat(parts[0]);
+      center = [parseFloat(parts[1]), parseFloat(parts[2])];
+      rotation = parseFloat(parts[3]);
+    } 
+};
+
 if (window.location.hash !== '') {
   // try to restore center, zoom-level and rotation from the URL
   const hash = window.location.hash.replace('#map=', '');
@@ -95,6 +107,7 @@ const updatePermalink = function () {
     rotation: view.getRotation(),
   };
   window.history.pushState(state, 'map', hash);
+  sessionStorage.setItem('hash', hash);
 };
 
 map.on('moveend', updatePermalink);
