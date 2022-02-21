@@ -305,17 +305,17 @@
                 admin_capas.setAttribute('title','Administrador de Capas');    
             };
 
-            if (!!sessionStorage.getItem('zoom'))  
-            {
-            let view_i = map.getView();
-            view_i.animate({
-            zoom: sessionStorage.getItem('zoom'),
-            duration: 500
-             });
-             let divisiones = sessionStorage.getItem('center').split(",",2);
-             UbicarEnMapa(parseFloat(divisiones[1]),parseFloat(divisiones[0]));
+            // if (!!sessionStorage.getItem('zoom'))  
+            // {
+            // let view_i = map.getView();
+            // view_i.animate({
+            // zoom: sessionStorage.getItem('zoom'),
+            // duration: 500
+            //  });
+            //  let divisiones = sessionStorage.getItem('center').split(",",2);
+            //  UbicarEnMapa(parseFloat(divisiones[1]),parseFloat(divisiones[0]));
 
-            };
+            // };
         </script>
         </body>
 
