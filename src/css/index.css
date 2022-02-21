@@ -87,8 +87,12 @@ div.footer>div:nth-child(1){
 #coordinates{
     width: 250px;
 }
+#zoom-level{
+    width: 50px;
+}
 /* #coordinates*/
 #coordinates,
+#zoom-level,
 #username,
 #spatialreference {
     background-color: #fff;
