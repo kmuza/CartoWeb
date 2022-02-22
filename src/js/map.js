@@ -183,3 +183,13 @@ map.on('pointermove', function (evt) {
     map.getTargetElement().style.cursor = hit ? 'pointer' : '';
 });
 
+var zoonAnt = map.getView().getZoom();
+document.getElementById('zoom-level-label').innerHTML = zoonAnt;
+map.on('moveend', function(e) {
+  zoomAct = map.getView().getZoom();
+  if (zoonAnt != zoomAct) {
+    document.getElementById('zoom-level-label').innerHTML = zoomAct.toFixed(2);
+    //console.log('zoom end, new zoom: ' + zoomAct);
+    zoonAnt = zoomAct;
+  }
+});
