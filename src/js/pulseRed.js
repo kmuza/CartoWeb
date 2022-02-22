@@ -41,6 +41,8 @@ function createTableBodyString(featuresObjList) {
 
 function createTableString(table_header, table_body) {
     let table = document.createElement('table');
+    //add attribute to table
+    table.setAttribute('id', 'table-container-breakpoint')
     table.innerHTML = table_header + table_body;
     return table.outerHTML;
 }
@@ -78,62 +80,35 @@ function createTableTrafo(properties) {
     return '<table class="propiedades">' + innerHTML + '</table>'
 }
 
-function createTableClientes(properties) {
-    return `        
-    <table id="table-container-breakpoint">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Height</th>
-            <th>Province</th>
-            <th>Sport</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Jill Smith abelardo de las priella</td>
-            <td>25</td>
-            <td>Female</td>
-            <td>5'4</td>
-            <td>British Columbia</td>
-            <td>Volleyball</td>
-          </tr>
-          <tr>
-            <td>John Stone</td>
-            <td>30</td>
-            <td>Male</td>
-            <td>5'9</td>
-            <td>Ontario</td>
-            <td>Badminton</td>
-          </tr>
-          <tr>
-            <td>Jane Strip</td>
-            <td>29</td>
-            <td>Female</td>
-            <td>5'6</td>
-            <td>Manitoba</td>
-            <td>Hockey</td>
-          </tr>
-          <tr>
-            <td>Gary Mountain</td>
-            <td>21</td>
-            <td>Mail</td>
-            <td>5'8</td>
-            <td>Alberta</td>
-            <td>Curling</td>
-          </tr>
-          <tr>
-            <td>James Camera</td>
-            <td>31</td>
-            <td>Male</td>
-            <td>6'1</td>
-            <td>British Columbia</td>
-            <td>Hiking</td>
-          </tr>
-        </tbody>
-      </table>`
+const createTableClientes = async (properties) => {
+    let clientes = null;
+    container_content.innerHTML = `<div class="spinner"></div>`;
+    const apiClient = new ApiClient(backend_url, x_api_key);
+    const token = await apiClient.getToken();
+    apiClient.getClientes(properties['long'], properties['lat'])
+        .then(response => {
+            clientes = response.data;
+        }).then(function () {
+            const headerArr = Object.keys(clientes[0]);
+            const header_str = createTableHeaderString(headerArr);
+            const body_str = createTableBodyString(clientes);
+            container_content.innerHTML = createTableString(header_str, body_str);
+
+
+
+        })
+        .catch(function(error) { console.log(error); /* esta línea podría arrojar error, e.g. cuando console = {} */ })
+        .finally(function () {
+            isLoading = false;
+            const table_cliente = new basictable('#table-container-breakpoint', {
+                containerBreakpoint: 578,
+                tableWrap: true,
+            });
+            table_cliente.start();
+        }); 
+    
+
+   
 }
 
 function decodeTableClientes(properties) {
@@ -158,12 +133,12 @@ const showPopUp = () => {
 
 const MostrarModal = async (properties) => {
     // antiguo MostrarModal
-    if (document.getElementById('costumer').classList.contains('active')) {
-    } else {
-        element = document.getElementById("costumer").classList.remove("disabled");
-        document.getElementById('costumer_a').click();
-    }
-    document.getElementById("costumers_tbody").innerHTML = "";
+    // if (document.getElementById('costumer').classList.contains('active')) {
+    // } else {
+    //     element = document.getElementById("costumer").classList.remove("disabled");
+    //     document.getElementById('costumer_a').click();
+    // }
+    // document.getElementById("costumers_tbody").innerHTML = "";
 
 
     const apiClient = new ApiClient(backend_url, x_api_key);
@@ -177,13 +152,13 @@ const MostrarModal = async (properties) => {
     // apiClient.setToken(token);
     apiClient.getClientes(properties['long'], properties['lat']).then(response => {
         const clientes = response.data;
-        // console.log(response.data.length);
-        for (var i = 0; i < clientes.length; i++) {
-            //console.log(clientes[i]);
-            let tr = document.createElement('tr');
-            tr.innerHTML = `<td>${clientes[i]['CODIGOCLIENTESGD']}</td><td>${clientes[i]['NOMBRESUSCRIPTOR']}</td><td>${clientes[i]['NOMBRESUSCRIPTOR']}</td>`;
-            document.getElementById("costumers_tbody").appendChild(tr);
-        }
+        console.log(response.data);
+        // for (var i = 0; i < clientes.length; i++) {
+        //     //console.log(clientes[i]);
+        //     let tr = document.createElement('tr');
+        //     tr.innerHTML = `<td>${clientes[i]['CODIGOCLIENTESGD']}</td><td>${clientes[i]['NOMBRESUSCRIPTOR']}</td><td>${clientes[i]['NOMBRESUSCRIPTOR']}</td>`;
+        //     document.getElementById("costumers_tbody").appendChild(tr);
+        // }
 
     });
 
@@ -206,12 +181,13 @@ function switchEvent(properties) {
         // hidePopUp();
         // container_content.innerHTML = '';
         // MostrarModal(properties);
-        console.log(properties);
-        container_content.innerHTML = createTableClientes(properties);
-        new basictable('#table-container-breakpoint', {
-            containerBreakpoint: 578,
-            tableWrap: true,
-        });
+        createTableClientes(properties);
+        //console.log(properties);
+        // container_content.innerHTML = createTableClientes(properties);
+        // new basictable('#table-container-breakpoint', {
+        //     containerBreakpoint: 578,
+        //     tableWrap: true,
+        // });
         return;
     } else if (properties.hasOwnProperty('fnap')) {
         console.log('tramobt');

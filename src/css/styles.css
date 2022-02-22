@@ -58,6 +58,7 @@ table th {
   background: #56a2cf;
   color: #ffffff;
   text-transform: uppercase;
+  font-size: .65rem;
 }
 
 table tr td {
@@ -70,7 +71,7 @@ table tr:nth-of-type(2n+2) td {
 }
 
 table.bt tbody td {
-  font-size: .8125rem;
+  font-size: .65rem;
   padding: 0;
 }
 
@@ -95,3 +96,43 @@ table.bt tbody td:last-of-type:before,
 table.bt tbody td:last-of-type .bt-content {
   padding-bottom: 10px;
 }
+
+table.bt tfoot th::before, table.bt tfoot td::before, table.bt tbody td::before {
+    width: 12em;
+}
+
+@keyframes spinner {
+    0% {
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    100% {
+         transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
+
+/* loader spinner */
+.spinner {
+    /* // The height here is just for demo purposes */
+    height: 40px;  
+    opacity: 1;
+    position: relative;
+    transition: opacity linear 0.1s;
+}
+
+.spinner::before {
+        animation: 2s linear infinite spinner;
+        border: solid 3px #eee;
+        border-bottom-color: #56a2cf;
+        border-radius: 50%;
+        content: "";
+        height: 40px;
+        left: 50%;
+        opacity: inherit;
+        position: absolute;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        transform-origin: center;
+        width: 40px;
+        will-change: transform;
+}
+

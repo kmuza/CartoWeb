@@ -65,7 +65,7 @@ class ApiClient {
         // return await response.json();
         const token = await response.json();
         this.setToken(token.data.token); 
-        return token;
+        // return token;
     }
 
     async getApoyo(id) {
