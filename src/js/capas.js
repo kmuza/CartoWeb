@@ -242,6 +242,59 @@ const estilosCliente = (feature) => {
     return estilo;
 };
 
+
+let style_departamento = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'darkred',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(139, 0, 0, 0.1)',
+    }),
+  });
+
+let style_municipio = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'green',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(0, 128, 0, 0.1)',
+    }),
+  });
+
+let style_localidad = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'magenta',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 0, 255, 0.2)',
+    }),
+  });
+
+let style_barrio = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'blue',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(0, 0, 255, 0.1)',
+    }),
+  });
+
+  let style_subestacion = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'black',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 255, 0, 0.4)',
+    }),
+  });
+
+    
+
 // CAPAS
 // ---------------------------------------------------------------------------------------------------------------------
 // SOURCES

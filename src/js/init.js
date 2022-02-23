@@ -46,9 +46,28 @@ const paintCapAbilities = async (vector_layers) => {
       case 'clientes':
           style_layer = estilosCliente;
           break;          
-    }
+      case 'subestacion':
+          style_layer = style_subestacion;
+          break;
+      }
 
     if (administrativos.includes(id)) {
+
+// Hacer lo mismo que esta en las lineas de la 31 a la 47 para asignar el estilo y quito el comentario de la linea 63  
+    switch(id){
+      case 'departamento':
+          style_layer = style_departamento;
+          break;
+      case 'municipio':
+          style_layer = style_municipio;
+          break;
+      case 'localidad':
+          style_layer = style_localidad;
+          break;   
+      case 'barrios':
+          style_layer = style_barrio;
+          break;          
+}
 
       source = new ol.source.VectorTile({
         url: vector_layers[i].tiles[0],
@@ -60,7 +79,7 @@ const paintCapAbilities = async (vector_layers) => {
         source: source,
         minZoom: parseInt(vector_layers[i].minzoom) + 1,
         maxZoom: vector_layers[i].maxzoom,
-        // style: style_layer,
+        style: style_layer,
         visible: false,
       });
 
