@@ -230,6 +230,50 @@ let style_cliente = new ol.style.Style({
     })
 });
 
+
+function reverse (value){
+    let R;
+    let G;
+    let B;
+    
+    R = value.slice(0,2);
+    G = value.slice(2,4);
+    B = value.slice(4,6);
+    return `${B}${G}${R}`;
+    }
+
+function codigo_energis(expr){
+        return "#" +reverse(((expr)>>>0).toString(16).slice(-6));
+}
+
+function eval_color_by_tension(context) {
+    //varios circuitos
+    var feature = context.feature;
+    var color = '';
+    var expr;
+    if (feature.hasOwnProperty('circuito')){
+        expr = feature.get('color')
+    }else{
+       expr = feature.get('color')
+    }
+    color = codigo_energis(expr);
+
+    return color;
+}
+
+var style_tramomt = function(feature){
+    var context = {
+        feature: feature,
+        variables: {}
+    };
+    return [ new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                width: 5,
+                color : eval_color_by_tension(context)
+            })
+        })]; 
+}; 
+
 const estilosCliente = (feature) => {
     var coord = feature.getFlatCoordinates().toString();
     let estilo = [];
@@ -245,15 +289,15 @@ const estilosCliente = (feature) => {
 // CAPAS
 // ---------------------------------------------------------------------------------------------------------------------
 // SOURCES
-let source_Apoyos = new ol.source.VectorTile({
-    format: new ol.format.MVT(),
-    url: tiles_server + capa_apoyos,
-})
+//let source_Apoyos = new ol.source.VectorTile({
+//    format: new ol.format.MVT(),
+//    url: tiles_server + capa_apoyos,
+//})
 
-let source_Clientes = new ol.source.VectorTile({
-    format: new ol.format.MVT(),
-    url: tiles_server + capa_clientes,
-});
+//let source_Clientes = new ol.source.VectorTile({
+//    format: new ol.format.MVT(),
+//    url: tiles_server + capa_clientes,
+//});
 
 
 
