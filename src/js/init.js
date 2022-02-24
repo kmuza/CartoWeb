@@ -14,14 +14,14 @@ const loadCapAbilities = async () => {
 // loadCapAbilities();
 
 const paintCapAbilities = async (vector_layers) => {
-  // lista de layers administrativos
-  const administrativos = ['departamento', 'municipio', 'localidad', 'barrios'];
-  
-  let layers = []; //<-- capas de negocios para pintar
-  let layers_admin = []; //<-- capas administrativas para pintar
-  let source;
-  let layer;
-  
+    // lista de layers administrativos
+    const administrativos = ['departamento', 'municipio', 'localidad', 'barrios'];
+    
+    let layers = []; //<-- capas de negocios para pintar
+    let layers_admin = []; //<-- capas administrativas para pintar
+    let source;
+    let layer;
+    
 
 
   for (i = 0; i < vector_layers.length; i++) {
@@ -31,24 +31,27 @@ const paintCapAbilities = async (vector_layers) => {
     let style_layer;
 
     switch(id){
-      case 'apoyos':
-          style_layer = style_apoyos;
-          break;
+        case 'apoyos':
+            style_layer = style_apoyos;
+            break;
     //   case 'tramobt':
     //       style_layer = style_ap_linea;
     //       break;
-    //   case 'tramomt':
-    //       style_layer = style_ap_linea;
-    //       break;
-      case 'trafos':
-          style_layer = style_trafo;
-          break;   
-      case 'clientes':
-          style_layer = estilosCliente;
-          break;          
-      case 'subestacion':
-          style_layer = style_subestacion;
+      case 'tramomt':
+          style_layer = style_ap_linea;
           break;
+      case 'trafos':
+            style_layer = style_trafo;
+            break;   
+      case 'clientes':
+            style_layer = estilosCliente;
+            break;          
+      case 'subestacion':
+            style_layer = style_subestacion;
+            break;
+      case 'acometidas':
+            style_layer = estiloAcometida;
+            break; 
       }
 
     if (administrativos.includes(id)) {

@@ -283,7 +283,7 @@ let style_barrio = new ol.style.Style({
     }),
   });
 
-  let style_subestacion = new ol.style.Style({
+let style_subestacion = new ol.style.Style({
     stroke: new ol.style.Stroke({
       color: 'black',
       width: 3,
@@ -291,46 +291,17 @@ let style_barrio = new ol.style.Style({
     fill: new ol.style.Fill({
       color: 'rgba(255, 255, 0, 0.4)',
     }),
-  });
+});
 
-    
-
-// CAPAS
-// ---------------------------------------------------------------------------------------------------------------------
-// SOURCES
-let source_Apoyos = new ol.source.VectorTile({
-    format: new ol.format.MVT(),
-    url: tiles_server + capa_apoyos,
-})
-
-let source_Clientes = new ol.source.VectorTile({
-    format: new ol.format.MVT(),
-    url: tiles_server + capa_clientes,
+let estiloAcometida = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+        width: 1,
+        color : 'gray'
+    })
 });
 
 
-
-// LAYERS
-// let layer_Apoyos = new ol.layer.VectorTile({
-//     name: 'apoyos',
-//     source: source_Apoyos,
-//     minZoom: 17,
-//     maxZoom: 20,
-//     style: style_apoyos,
-// });
-
-// let layer_clientes = new ol.layer.VectorTile({
-//     name: 'clientes',
-//     source: source_Clientes,
-//     minZoom: 18,
-//     maxZoom: 20,
-//     style: estilosCliente,  
-// });
-
-// const mapaBase = new ol.layer.Tile({
-//   source: new ol.source.OSM()
-// });
-
+/// FIN ESTILOS ---------------------------------------------------------------------------------------
 
 
 
