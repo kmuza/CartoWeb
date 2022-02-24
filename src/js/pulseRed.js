@@ -80,6 +80,15 @@ function createTableTrafo(properties) {
     return '<table class="propiedades">' + innerHTML + '</table>'
 }
 
+function createTableSubestacion(properties) {
+    const keys = ['codigosub', 'nombresub', 'niveltension'];
+    let innerHTML = `<tr><th>Propiedad</th><th>Valor</th></tr>`;
+    keys.forEach(key => {
+        innerHTML += createRow(key, properties[key]);
+    });
+    return '<table class="propiedades">' + innerHTML + '</table>'
+}
+
 const createTableClientes = async (properties) => {
     let clientes = null;
     container_content.innerHTML = `<div class="spinner"></div>`;
@@ -190,10 +199,14 @@ function switchEvent(properties) {
         // });
         return;
     } else if (properties.hasOwnProperty('fnap')) {
-        console.log('tramobt');
+        // console.log('tramobt');
         container_content.innerHTML = createTableTramobt(properties);
         return;
-    } else {
+    }  else if (properties.hasOwnProperty('codigosub')) {
+        console.log('subestacion');
+        container_content.innerHTML = createTableSubestacion(properties);
+        return;
+    }else {
         console.log('no se encontro propiedad');
         container_content.innerHTML = '';
         // hidePopUp();
@@ -204,7 +217,7 @@ function switchEvent(properties) {
 
 // SOLO LOS LAYERS QUE RETORNEN TRUE SERAN ATENDIDOS EN EL PULSE CLICK
 function onlyLayerFilter(layer) {
-    const list_layers = ['apoyos', 'clientes', 'trafos', 'tramomt', 'tramobt'];
+    const list_layers = ['apoyos', 'clientes', 'trafos', 'subestacion'];
     return list_layers.includes(layer.get('name'));
 }
 

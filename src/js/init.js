@@ -34,25 +34,25 @@ const paintCapAbilities = async (vector_layers) => {
         case 'apoyos':
             style_layer = style_apoyos;
             break;
-    //   case 'tramobt':
-    //       style_layer = style_ap_linea;
-    //       break;
-      case 'tramomt':
-          style_layer = style_ap_linea;
-          break;
-      case 'trafos':
-            style_layer = style_trafo;
-            break;   
-      case 'clientes':
-            style_layer = estilosCliente;
-            break;          
-      case 'subestacion':
-            style_layer = style_subestacion;
+        //   case 'tramobt':
+        //       style_layer = style_ap_linea;
+        //       break;
+        case 'tramomt':
+            style_layer = style_tramomt;
             break;
-      case 'acometidas':
-            style_layer = estiloAcometida;
-            break; 
-      }
+        case 'trafos':
+                style_layer = style_trafo;
+                break;   
+        case 'clientes':
+                style_layer = estilosCliente;
+                break;          
+        case 'subestacion':
+                style_layer = style_subestacion;
+                break;
+        case 'acometidas':
+                style_layer = estiloAcometida;
+                break; 
+    }
 
     if (administrativos.includes(id)) {
 
