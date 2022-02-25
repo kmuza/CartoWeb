@@ -243,7 +243,7 @@ function reverse (value){
     }
 
 function codigo_energis(expr){
-        return "#" +reverse(((expr)>>>0).toString(16).slice(-6));
+        return "#" +reverse(((expr)>>>0).toString(16).slice(-6)).padEnd(6,000);
 }
 
 function eval_color_by_tension(context) {
