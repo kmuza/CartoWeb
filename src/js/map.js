@@ -1,7 +1,45 @@
+let shouldUpdate = true;
+
+
 const attribution = new ol.control.Attribution({
     collapsible: true,
 });
 
+// default zoom, center and rotation
+let zoom = 9;
+let center = ol.proj.fromLonLat([-73.1202805, 7.107080]);
+let rotation = 0;
+
+
+if (!!sessionStorage.getItem('hash')) {
+    console.log('sessionStorage.getItem("hash")');
+    let hash = sessionStorage.getItem('hash').replace('#map=', '');
+    const parts = hash.split('/');
+    if (parts.length === 4) {
+      zoom = parseFloat(parts[0]);
+      center = [parseFloat(parts[1]), parseFloat(parts[2])];
+      rotation = parseFloat(parts[3]);
+    } 
+};
+
+if (window.location.hash !== '') {
+  // try to restore center, zoom-level and rotation from the URL
+  const hash = window.location.hash.replace('#map=', '');
+  const parts = hash.split('/');
+  if (parts.length === 4) {
+    zoom = parseFloat(parts[0]);
+    center = [parseFloat(parts[1]), parseFloat(parts[2])];
+    rotation = parseFloat(parts[3]);
+  }
+}
+
+let view = new ol.View({
+        center: center,
+        zoom: zoom,
+        rotation: rotation,
+        minZoom: 1,
+        maxZoom: 20,
+    })
 
 
 let map = new ol.Map({
@@ -9,13 +47,8 @@ let map = new ol.Map({
     controls: ol.control.defaults({
         attribution: false
     }).extend([attribution]),
-    layers: [baseLayers, grupo_capas],
-    view: new ol.View({
-        center: ol.proj.fromLonLat([-73.1202805, 7.107080]),
-        minZoom: 1,
-        maxZoom: 20,
-        zoom: 19
-    })
+    layers: [baseLayers],
+    view: view
 });
 
 
@@ -35,16 +68,64 @@ const sidebar = new ol.control.Sidebar({
     element: 'sidebar',
     position: 'left'
 });
-
+//<i class="fas fa-map-marker-alt"></i>
 // BUSQUEDA
 var buscar = new ol.control.Button({
-  html: '<i class="fa fa-search" id="buscar_apoyo"  aria-hidden="true"></i>',
+  html: '<i class="fas fa-map-marker-alt" id="buscar_apoyo"  aria-hidden="true"></i>',
   className: "buscar_apoyo",
-  title: "Buscar por pintado en cartografia",
+  title: "Buscar por coordenadas en la cartografia",
   handleClick: async function () {
     await BuscarApoyoCartografia();
   }
 });
+
+
+// mantener el estado de la vista zoom y center
+
+const updatePermalink = function () {
+    const view = map.getView();
+
+  if (!shouldUpdate) {
+    // do not update the URL when the view was changed in the 'popstate' handler
+    shouldUpdate = true;
+    return;
+  }
+
+  const center = view.getCenter();
+  const hash =
+    '#map=' +
+    view.getZoom().toFixed(2) +
+    '/' +
+    center[0].toFixed(2) +
+    '/' +
+    center[1].toFixed(2) +
+    '/' +
+    view.getRotation();
+  const state = {
+    zoom: view.getZoom(),
+    center: view.getCenter(),
+    rotation: view.getRotation(),
+  };
+  window.history.pushState(state, 'map', hash);
+  sessionStorage.setItem('hash', hash);
+};
+
+map.on('moveend', updatePermalink);
+
+// restore the view state when navigating through the history, see
+// https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate
+window.addEventListener('popstate', function (event) {
+  if (event.state === null) {
+    return;
+  }
+  map.getView().setCenter(event.state.center);
+  map.getView().setZoom(event.state.zoom);
+  map.getView().setRotation(event.state.rotation);
+  shouldUpdate = false;
+});
+
+
+/// -----------------------------------------------------------------------------
 
 // layerSwitcher
 var ctrl = new ol.control.LayerSwitcher({
@@ -102,3 +183,13 @@ map.on('pointermove', function (evt) {
     map.getTargetElement().style.cursor = hit ? 'pointer' : '';
 });
 
+var zoonAnt = map.getView().getZoom();
+document.getElementById('zoom-level-label').innerHTML = zoonAnt;
+map.on('moveend', function(e) {
+  zoomAct = map.getView().getZoom();
+  if (zoonAnt != zoomAct) {
+    document.getElementById('zoom-level-label').innerHTML = zoomAct.toFixed(2);
+    //console.log('zoom end, new zoom: ' + zoomAct);
+    zoonAnt = zoomAct;
+  }
+});

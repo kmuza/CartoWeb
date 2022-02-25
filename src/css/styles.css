@@ -1,0 +1,138 @@
+/* estilos swit alerts */
+.fila-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.fila-flex > label {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.fila-flex > label[target=tittle] {
+    min-width: 150px;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.swal2-input{
+    height: 2em;
+    margin: 0.3em 1em;
+}
+
+table {
+  background: white;
+  border-collapse: collapse;
+  margin: 1.25em 0 0;
+  width: 100%;
+}
+
+table tr,
+table th,
+table td {
+  border: none;
+  border-bottom: 1px solid #e4ebeb;
+  font-family: 'Lato', sans-serif;
+  font-size: .875rem;
+}
+
+table th,
+table td {
+  padding: 10px 12px;
+  text-align: left;
+}
+
+table th {
+  background: #56a2cf;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: .65rem;
+}
+
+table tr td {
+  background: #eaf3f5;
+  color: #999999;
+}
+
+table tr:nth-of-type(2n+2) td {
+  background: #ffffff;
+}
+
+table.bt tbody td {
+  font-size: .65rem;
+  padding: 0;
+}
+
+table.bt tbody td:before {
+  background: #56a2cf;
+  color: white;
+  margin-right: 10px;
+  padding: 2px 10px;
+}
+
+table.bt tbody td .bt-content {
+  display: inline-block;
+  padding: 2px 5px;
+}
+
+table.bt tbody td:first-of-type:before,
+table.bt tbody td:first-of-type .bt-content {
+  padding-top: 10px;
+}
+
+table.bt tbody td:last-of-type:before,
+table.bt tbody td:last-of-type .bt-content {
+  padding-bottom: 10px;
+}
+
+table.bt tfoot th::before, table.bt tfoot td::before, table.bt tbody td::before {
+    width: 12em;
+}
+
+@keyframes spinner {
+    0% {
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    100% {
+         transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
+
+/* loader spinner */
+.spinner {
+    /* // The height here is just for demo purposes */
+    height: 40px;  
+    opacity: 1;
+    position: relative;
+    transition: opacity linear 0.1s;
+}
+
+.spinner::before {
+        animation: 2s linear infinite spinner;
+        border: solid 3px #eee;
+        border-bottom-color: #56a2cf;
+        border-radius: 50%;
+        content: "";
+        height: 40px;
+        left: 50%;
+        opacity: inherit;
+        position: absolute;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        transform-origin: center;
+        width: 40px;
+        will-change: transform;
+}
+

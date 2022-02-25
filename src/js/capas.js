@@ -230,6 +230,50 @@ let style_cliente = new ol.style.Style({
     })
 });
 
+
+function reverse (value){
+    let R;
+    let G;
+    let B;
+    
+    R = value.slice(0,2);
+    G = value.slice(2,4);
+    B = value.slice(4,6);
+    return `${B}${G}${R}`;
+    }
+
+function codigo_energis(expr){
+        return "#" +reverse(((expr)>>>0).toString(16).slice(-6)).padEnd(6,000);
+}
+
+function eval_color_by_tension(context) {
+    //varios circuitos
+    var feature = context.feature;
+    var color = '';
+    var expr;
+    if (feature.hasOwnProperty('circuito')){
+        expr = feature.get('color')
+    }else{
+       expr = feature.get('color')
+    }
+    color = codigo_energis(expr);
+
+    return color;
+}
+
+var style_tramomt = function(feature, resolution){
+    var context = {
+        feature: feature,
+        variables: {}
+    };
+    return [ new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                width:  resolution > 10 ? 1.5 : 3.5,
+                color : eval_color_by_tension(context)
+            })
+        })]; 
+}; 
+
 const estilosCliente = (feature) => {
     var coord = feature.getFlatCoordinates().toString();
     let estilo = [];
@@ -242,47 +286,81 @@ const estilosCliente = (feature) => {
     return estilo;
 };
 
+
+let style_departamento = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'darkred',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(139, 0, 0, 0.1)',
+    }),
+  });
+
+let style_municipio = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'green',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(0, 128, 0, 0.1)',
+    }),
+  });
+
+let style_localidad = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'magenta',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 0, 255, 0.2)',
+    }),
+  });
+
+let style_barrio = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'blue',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(0, 0, 255, 0.1)',
+    }),
+  });
+
+let style_subestacion = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'black',
+      width: 3,
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 255, 0, 0.4)',
+    }),
+});
+
+let estiloAcometida = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+        width: 1,
+        color : 'gray'
+    })
+});
+
+
 // CAPAS
 // ---------------------------------------------------------------------------------------------------------------------
 // SOURCES
-let source_Apoyos = new ol.source.VectorTile({
-    format: new ol.format.MVT(),
-    url: tiles_server + capa_apoyos,
-})
+//let source_Apoyos = new ol.source.VectorTile({
+//    format: new ol.format.MVT(),
+//    url: tiles_server + capa_apoyos,
+//})
 
-let source_Clientes = new ol.source.VectorTile({
-    format: new ol.format.MVT(),
-    url: tiles_server + capa_clientes,
-});
+//let source_Clientes = new ol.source.VectorTile({
+//    format: new ol.format.MVT(),
+//    url: tiles_server + capa_clientes,
+//});
 
 
+/// FIN ESTILOS ---------------------------------------------------------------------------------------
 
-// LAYERS
-let layer_Apoyos = new ol.layer.VectorTile({
-    name: 'apoyos',
-    source: source_Apoyos,
-    minZoom: 17,
-    maxZoom: 20,
-    style: style_apoyos,
-});
-
-let layer_clientes = new ol.layer.VectorTile({
-    name: 'clientes',
-    source: source_Clientes,
-    minZoom: 18,
-    maxZoom: 20,
-    style: estilosCliente,  
-});
-
-// const mapaBase = new ol.layer.Tile({
-//   source: new ol.source.OSM()
-// });
-
-// GRUPOS DE CAPAS
-let grupo_capas =  new ol.layer.Group({
-  title: 'Capas Base',
-  layers: [layer_Apoyos, layer_clientes ]
-})
 
 
 // MAPAS BASES
@@ -305,4 +383,5 @@ var baseLayers   = new ol.layer.Group({
         })
     ]
 });
+
 
