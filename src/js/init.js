@@ -29,12 +29,12 @@ const paintCapAbilities = async (vector_layers) => {
       case 'apoyos':
           style_layer = style_apoyos;
           break;
-    //   case 'tramobt':
-    //       style_layer = style_ap_linea;
-    //       break;
-    //   case 'tramomt':
-    //       style_layer = style_ap_linea;
-    //       break;
+       case 'tramobt':
+          style_layer = style_tramobt;
+          break;
+       case 'tramomt':
+          style_layer = style_tramomt;
+          break;
       case 'trafos':
           style_layer = style_trafo;
           break;   
