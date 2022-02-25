@@ -230,6 +230,71 @@ let style_cliente = new ol.style.Style({
     })
 });
 
+
+function reverse (value){
+    let R;
+    let G;
+    let B;
+    
+    R = value.slice(0,2);
+    G = value.slice(2,4);
+    B = value.slice(4,6);
+    return `${B}${G}${R}`;
+    }
+
+function codigo_energis(expr){
+        return "#" +reverse(((expr)>>>0).toString(16).slice(-6)).padEnd(6,000);
+}
+
+function eval_color_by_tension(context) {
+    //varios circuitos
+    var feature = context.feature;
+    var color = '';
+    var expr = feature.get('color');
+    if (!expr){
+        expr = '#000000';
+    }
+    color = codigo_energis(expr);
+
+    return color;
+}
+
+function eval_color_by_circuitoBt(context) {
+    var feature = context.feature;
+    var color = '#' + feature.get('color');
+    if(color === '#'){
+        color = '#000000';
+    }
+    
+    return color;
+}
+
+var style_tramomt = function(feature, resolution){
+    var context = {
+        feature: feature,
+        variables: {}
+    };
+    return [ new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                width:  resolution > 10 ? 2.5 : 4.5,
+                color : eval_color_by_tension(context)
+            })
+        })]; 
+}; 
+
+var style_tramobt = function(feature, resolution){
+    var context = {
+        feature: feature,
+        variables: {} 
+    };
+    return [ new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                width:  resolution > 10 ? 1.5 : 2.5,
+                color : eval_color_by_circuitoBt(context)
+            })
+        })]; 
+}; 
+
 const estilosCliente = (feature) => {
     var coord = feature.getFlatCoordinates().toString();
     let estilo = [];
